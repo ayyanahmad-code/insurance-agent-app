@@ -1,4 +1,5 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { FaReact, FaNodeJs } from "react-icons/fa";
 import { FaHtml5, FaCss3Alt } from "react-icons/fa6";
 import { SiMysql, SiJavascript } from "react-icons/si";
@@ -12,6 +13,20 @@ export default function HomePage() {
     { name: "Node.js", icon: <FaNodeJs size={28} className="text-green-500" />, level: "75%" },
     { name: "JavaScript", icon: <SiJavascript size={28} className="text-yellow-500" />, level: "92%" },
   ];
+
+  // Animation Variants
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: { staggerChildren: 0.3 }, // delay each child
+    },
+  };
+
+  const item = {
+    hidden: { opacity: 0, y: 50 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -67,10 +82,18 @@ export default function HomePage() {
             Technologies I'm proficient with
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Animate Grid */}
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {skills.map((skill, index) => (
-              <div
+              <motion.div
                 key={index}
+                variants={item}
                 className="bg-white border-2 border-indigo-200 rounded-2xl shadow-md p-6 flex flex-col items-center hover:shadow-xl hover:border-indigo-400 transition"
               >
                 {skill.icon}
@@ -87,9 +110,9 @@ export default function HomePage() {
                     style={{ width: skill.level }}
                   ></div>
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>
