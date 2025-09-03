@@ -9,7 +9,7 @@ export function SimpleFooter() {
         
         {/* Left Side - Brand */}
         <Typography color="white" className="text-lg font-semibold">
-          © {new Date().getFullYear()} Websites Development 🚀
+          © {new Date().getFullYear()} Websites Development ayyan 🚀
         </Typography>
 
         {/* Middle - Navigation */}
